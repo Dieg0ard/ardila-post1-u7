@@ -18,7 +18,7 @@ Este repositorio contiene tres programas escritos en **ensamblador x86 (NASM)** 
 |---|---|
 | `post1.asm` | Salida básica de texto usando INT 21h (función 09h) |
 | `post1b.asm` | Control de cursor y escritura con colores usando INT 10h |
-| `post1c.asm` | Ejercicio complementario (parte C) |
+| `post1c.asm` | Título centrado con bucle carácter a carácter y color verde brillante (INT 10h) |
 | `capturas/` | Capturas de pantalla de la ejecución de los programas |
 
 ---
@@ -66,6 +66,26 @@ Demuestra el uso de la interrupción de video `INT 10h` para:
 ```bash
 nasm -f bin post1b.asm -o post1b.com
 post1b.com
+```
+
+---
+
+### `post1c.asm` — Título centrado con bucle y color (INT 10h)
+
+Muestra el título `"UNIDAD 7 - PANTALLA Y TECLADO"` centrado en la **fila 5** de la pantalla, con el texto en **verde brillante** sobre fondo negro (atributo `0Ah`).
+
+A diferencia de `post1b.asm`, este programa no escribe toda la cadena de una vez: utiliza un **bucle** que recorre la cadena carácter a carácter, posicionando el cursor con `INT 10h / AH=02h` antes de escribir cada uno con `AH=09h`. Esto permite un control preciso de la columna de inicio para lograr el centrado visual.
+
+**Atributo de color usado:**
+
+| Atributo | Valor | Descripción |
+|---|---|---|
+| Fondo negro + texto verde brillante | `0Ah` | `0000 1010b` |
+
+**Compilar y ejecutar:**
+```bash
+nasm -f bin post1c.asm -o post1c.com
+post1c.com
 ```
 
 ---
